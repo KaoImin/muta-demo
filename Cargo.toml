@@ -8,15 +8,15 @@ edition = "2018"
 derive_more = "0.99"
 serde = "1.0"
 serde_json = "1.0"
-smallvec = "1.4"
+smallvec = "1.5"
 
   [dependencies.muta]
   git = "https://github.com/nervosnetwork/muta"
-  tag = "v0.2.0-beta.1"
+  tag = "v0.2.1"
 
   [dependencies.protocol]
   git = "https://github.com/nervosnetwork/muta"
-  tag = "v0.2.0-beta.1"
+  tag = "v0.2.1"
   package = "muta-protocol"
 
   [dependencies.tokio]
@@ -25,7 +25,7 @@ smallvec = "1.4"
 
   [dependencies.asset]
   git = "https://github.com/nervosnetwork/muta"
-  tag = "v0.2.0-beta.1"
+  tag = "v0.2.1"
 
   [dependencies.metadata]
   path = "services/metadata"

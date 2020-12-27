@@ -1,6 +1,5 @@
 use derive_more::{Display, From};
 use metadata::MetadataService;
-use muta::MutaBuilder;
 use protocol::traits::{SDKFactory, Service, ServiceMapping, ServiceSDK};
 use protocol::{ProtocolError, ProtocolErrorKind, ProtocolResult};
 
@@ -27,20 +26,15 @@ impl ServiceMapping for DefaultServiceMapping {
 }
 
 fn main() {
-    let builder = MutaBuilder::new();
-
-    // set configs
-    let muta_builder = builder
-        .config_path("config/chain.toml")
-        .genesis_path("config/genesis.toml");
-
-    // set service-mapping
-    muta_builder
-        .service_mapping(DefaultServiceMapping {})
-        .build()
-        .unwrap()
-        .run()
-        .unwrap();
+    muta::run(
+        DefaultServiceMapping,
+        "muta-demo",
+        "v0.1.0",
+        "KaoImin<kaoimin@qq.com>",
+        "config/chain.toml",
+        "config/genesis.toml",
+        None,
+    )
 }
 
 #[derive(Debug, Display, From)]
