@@ -417,6 +417,18 @@ dependencies = [
 ]
 
 [[package]]
+name = "attestation"
+version = "0.1.0"
+dependencies = [
+ "binding-macro",
+ "byteorder",
+ "derive_more 0.15.0",
+ "muta-protocol",
+ "serde",
+ "serde_json",
+]
+
+[[package]]
 name = "attohttpc"
 version = "0.4.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2523,6 +2535,7 @@ name = "muta-demo"
 version = "0.1.0"
 dependencies = [
  "asset",
+ "attestation",
  "derive_more 0.99.11",
  "metadata 0.1.0",
  "muta",

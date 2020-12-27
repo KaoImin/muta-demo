@@ -1,3 +1,4 @@
+use attestation::AttestationService;
 use derive_more::{Display, From};
 use metadata::MetadataService;
 use protocol::traits::{SDKFactory, Service, ServiceMapping, ServiceSDK};
@@ -15,13 +16,18 @@ impl ServiceMapping for DefaultServiceMapping {
 
         let service = match name {
             "metadata" => Box::new(MetadataService::new(sdk)) as Box<dyn Service>,
+            "attestation" => Box::new(AttestationService::new(sdk)) as Box<dyn Service>,
             _ => return Err(MappingError::NotFoundService(name.to_string()).into()),
         };
         Ok(service)
     }
 
     fn list_service_name(&self) -> Vec<String> {
-        vec!["asset".to_owned(), "metadata".to_owned()]
+        vec![
+            "asset".to_owned(),
+            "metadata".to_owned(),
+            "attestation".to_owned(),
+        ]
     }
 }
 

@@ -30,5 +30,8 @@ smallvec = "1.5"
   [dependencies.metadata]
   path = "services/metadata"
 
+  [dependencies.attestation]
+  path = "services/attestation"
+
 [workspace]
 members = [ "services/metadata" ]
