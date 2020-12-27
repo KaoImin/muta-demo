@@ -33,5 +33,8 @@ smallvec = "1.5"
   [dependencies.attestation]
   path = "services/attestation"
 
+  [dependencies.lotterydraw]
+  path = "services/lotterydraw"
+
 [workspace]
 members = [ "services/metadata" ]

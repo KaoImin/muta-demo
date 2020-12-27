@@ -2264,6 +2264,21 @@ dependencies = [
 ]
 
 [[package]]
+name = "lotterydraw"
+version = "0.1.0"
+dependencies = [
+ "attestation",
+ "binding-macro",
+ "byteorder",
+ "derive_more 0.15.0",
+ "muta-codec-derive",
+ "muta-protocol",
+ "rlp 0.4.6",
+ "serde",
+ "serde_json",
+]
+
+[[package]]
 name = "lru"
 version = "0.6.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2537,6 +2552,7 @@ dependencies = [
  "asset",
  "attestation",
  "derive_more 0.99.11",
+ "lotterydraw",
  "metadata 0.1.0",
  "muta",
  "muta-protocol",
