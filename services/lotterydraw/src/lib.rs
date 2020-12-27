@@ -34,11 +34,17 @@ impl<SDK: ServiceSDK> LotterydrawService<SDK> {
     ) -> ServiceResponse<LotterydrawResponse> {
         
         let attestion_info  = payload.tx_hashes.iter().map(|hash| 
-            self.attestation.inner_query(&ctx, QueryAttestationPayload { hash: hash.clone() }).succeed_data.info
+            self.attestation
+                .inner_query(&ctx, QueryAttestationPayload { hash: hash.clone() })
+                .succeed_data
+                .info
         ).collect();
 
         if let Some(hash) = ctx.get_tx_hash() {
-            ServiceResponse::from_succeed(LotterydrawResponse { lottery_guys: lottery_guys(attestion_info, payload.lottery_num) })
+            let lottery_guys = lottery_guys(attestion_info, payload.lottery_num);
+            let res = LotterydrawResponse { lottery_guys };
+            self.lottery_guys.insert(hash.clone(), res.clone());
+            ServiceResponse::from_succeed(res)
         } else {
             ServiceResponse::from_error(103, "Missing tx hash".to_owned())
         }
