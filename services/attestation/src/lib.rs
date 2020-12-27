@@ -1,4 +1,4 @@
-mod types;
+pub mod types;
 
 use binding_macro::{cycles, service};
 use protocol::traits::{ExecutorParams, ServiceResponse, ServiceSDK, StoreMap};

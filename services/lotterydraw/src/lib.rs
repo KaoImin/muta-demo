@@ -7,6 +7,7 @@ use protocol::types::{Hash, ServiceContext};
 use rand::{thread_rng, Rng};
 
 use crate::types::{LotterydrawPayload, LotterydrawResponse};
+use attestation::types::QueryAttestationPayload;
 
 pub trait LotterydrawInterface {
     fn inner_lotterdraw(
@@ -23,7 +24,26 @@ pub struct LotterydrawService<SDK> {
 }
 
 #[service]
-impl<SDK: ServiceSDK> LotterydrawService<SDK> {}
+impl<SDK: ServiceSDK> LotterydrawService<SDK> {
+    #[cycles(210_00)]
+    #[write]
+    fn lottery(
+        &mut self,
+        ctx: ServiceContext,
+        payload: LotterydrawPayload,
+    ) -> ServiceResponse<LotterydrawResponse> {
+        
+        let attestion_info  = payload.tx_hashes.iter().map(|hash| 
+            self.attestation.inner_query(&ctx, QueryAttestationPayload { hash: hash.clone() }).succeed_data.info
+        ).collect();
+
+        if let Some(hash) = ctx.get_tx_hash() {
+            ServiceResponse::from_succeed(LotterydrawResponse { lottery_guys: lottery_guys(attestion_info, payload.lottery_num) })
+        } else {
+            ServiceResponse::from_error(103, "Missing tx hash".to_owned())
+        }
+    }
+}
 
 fn lottery_guys<T: Clone>(input: Vec<T>, num: usize) -> Vec<T> {
     let mut rng = thread_rng();
